@@ -10,7 +10,7 @@
 <body class="h-screen flex items-center justify-center bg-gray-100"> <!-- Centering the form -->
     
 <div class="w-full max-w-sm p-4 bg-white rounded-lg shadow-md dark:bg-gray-800"> <!-- Adding some styling to the form container -->
-<h5 class="text-lg font-semibold text-center text-gray-900 dark:text-white mb-5">PLEASE LOGIN FIRST</h5>
+<h5 class="text-lg font-semibold text-center text-gray-900 dark:text-white mb-5">WELLCOME TO SIGNUP</h5>
 @if (session()->has('error'))
 <div id="alert-1" class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
   <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -30,11 +30,15 @@
 @else
     
 @endif
-    <form method="post" action="{{route('login')}}">
+    <form method="post" action="{{route('signup')}}">
         @csrf
         <div class="mb-5">
-            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
-            <input type="name" id="name" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
+            <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Username</label>
+            <input type="username" id="username" name="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username" required />
+        </div>
+        <div class="mb-5">
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</label>
+            <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
         </div>
         <div class="mb-5">
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
@@ -46,7 +50,7 @@
      <!-- Sign Up link -->
      <p class="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
         Don't have an account? 
-        <a href="/signup" class="text-blue-600 hover:underline dark:text-blue-500">Sign Up</a>
+        <a href="/" class="text-blue-600 hover:underline dark:text-blue-500">Log In</a>
     </p>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
