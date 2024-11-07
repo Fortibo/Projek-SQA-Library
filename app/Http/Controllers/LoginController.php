@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,7 +18,20 @@ class LoginController extends Controller
         ]);
         if(Auth::attempt($cred)){
             $r->session()->regenerate();
-            return redirect()->intended('/user');
+           $user =  Auth::user();
+           
+           $userData = [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            // tambahkan data lain yang kamu perlukan
+        ];
+          $buku =  Book::all();
+            // return redirect()->route('user')->with('buku', $buku);
+            return view('user',[
+                'user'=>$userData,
+                'buku'=>$buku
+            ]);
         }
         return back()->with('error',"Login Failed");
     }
@@ -44,4 +58,13 @@ class LoginController extends Controller
         return redirect()->route('login');
 
     }
+    public function dashboard()
+{
+    // Ambil data user dan books dari session
+    $user = session('user');
+    // $books = session('books');
+
+    // Kirim data ke view
+    return view('user', compact('user'));
+}
 }

@@ -20,15 +20,28 @@ Route::get('/', function () {
 Route::get('/signup',function(){
     return view('signup');
 })->middleware('guest');
-Route::middleware('auth')->group(function(){
-    Route::get('/user',function(){
-        return view('user');
-    })->name('user');
+Route::middleware('role:admin,user')->group(function () {
+
+});
+Route::middleware('role:admin')->group(function () {
     Route::get('/admin',function(){
         return view('admin');
     })->name('admin');
+ 
+});
+Route::middleware('role:user')->group(function () {
+   
+}); 
 
+Route::middleware('auth')->group(function(){
+   
+  
+    // Route::get('/user', [LoginController::class, 'dashboard'])->name('user.dashboard');
+    Route::get('/user', function(){
+        return view('user');
+    })->name('user');
     Route::post('/logout',[LoginController::class,'logout'])->name('logout');   
+   
 });
 Route::post('/',[LoginController::class,'auth'])->name('login');
 Route::post('/signup',[LoginController::class,'create'])->name('signup');   

@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+use function Laravel\Prompts\table;
+
 class UserSeeder extends Seeder
 {
     /**
@@ -14,13 +16,39 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         
-        DB::table('roles')->insert([
-            'user_id'=> "1",
-            'role'=>"kasir"
+        // DB::table('roles')->insert([
+        //     'user_id'=> "1",
+        //     'role'=>"kasir"
+        // ]);
+        // DB::table('roles')->insert([
+        //     'user_id'=> "3",
+        //     'role'=>"user"
+        // ]);
+
+        DB::table('books')->insert([
+            'judul'=> "Halo",
+            'penulis'=> "Eric Yoel",
+            'deskripsi'=> "aieuawrgblfbefbfikwfhjfbw"
         ]);
-        DB::table('roles')->insert([
-            'user_id'=> "3",
-            'role'=>"user"
+        DB::table('books')->insert([
+            'judul'=> "Halo1",
+            'penulis'=> "Eric Yoel1",
+            'deskripsi'=> "aieuawrgblfbefbfikwfhjfbw"
+        ]);
+        DB::table('books')->insert([
+            'judul'=> "Halo2",
+            'penulis'=> "Eric Yoel2",
+            'deskripsi'=> "aieuawrgblfbefbfikwfhjfbw"
+        ]);
+        DB::table('books')->insert([
+            'judul'=> "Halo3",
+            'penulis'=> "Eric Yoel3",
+            'deskripsi'=> "aieuawrgblfbefbfikwfhjfbw"
+        ]);
+        DB::table('books')->insert([
+            'judul'=> "Halo4",
+            'penulis'=> "Eric Yoel4",
+            'deskripsi'=> "aieuawrgblfbefbfikwfhjfbw"
         ]);
     }
 }
