@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign("user_id")->references("id")->on("users")->nullable();
             $table->string('judul');
             $table->string('penulis');
-            $table->string('deskripsi');
+            $table->text('deskripsi');
             $table->timestamps();
         });
     }
