@@ -17,9 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('login');
 })->name('login.show')->middleware('guest');
+
 Route::get('/signup',function(){
     return view('signup');
 })->middleware('guest');
+
 Route::middleware('role:admin,user')->group(function () {
 
 });

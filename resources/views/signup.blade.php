@@ -10,7 +10,7 @@
 <body class="h-screen flex items-center justify-center bg-gray-100"> <!-- Centering the form -->
     
 <div class="w-full max-w-sm p-4 bg-white rounded-lg shadow-md dark:bg-gray-800"> <!-- Adding some styling to the form container -->
-<h5 class="text-lg font-semibold text-center text-gray-900 dark:text-white mb-5">WELLCOME TO SIGNUP</h5>
+<h5 class="text-lg font-semibold text-center text-gray-900 dark:text-white mb-5">SIGNUP</h5>
 @if (session()->has('error'))
 <div id="alert-1" class="flex items-center p-4 mb-4 text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
   <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
