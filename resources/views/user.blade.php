@@ -5,8 +5,8 @@
 <h5> Welcome  {{auth()->user()->name }}  </h5>
 </div>
 <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 ms-4 me-4">
-
-@foreach ($buku as $b)
+@if(session('buku'))
+@foreach (session('buku') as $b)
     <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <a href="#">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$b->judul}}</h5>
@@ -20,7 +20,7 @@
     </a>
 </div>
     @endforeach
-
+@endif
 
 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <a href="#">

@@ -26,7 +26,7 @@ class LoginController extends Controller
             'email' => $user->email,
             // tambahkan data lain yang kamu perlukan
         ];
-          $buku =  Book::all();
+          $buku =  Book::get();
             return redirect()->route('user')->with('buku', $buku);
             // return view('user',[
             //     'user'=>$userData,
