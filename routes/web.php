@@ -48,4 +48,7 @@ Route::middleware('role:user')->group(function () {
 Route::post('/',[LoginController::class,'auth'])->name('login');
 Route::post('/signup',[LoginController::class,'create'])->name('signup'); 
 Route::get('/buku/{id}',[BukuController::class,'tampil'])->name('detail.buku');  
+Route::get('/edit/buku/{id}',[BukuController::class,'edit'])->name('edit.buku');  
+Route::get('/add/buku/',[BukuController::class,'add'])->name('add.buku');  
+
 
