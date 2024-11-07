@@ -2,7 +2,7 @@
 @section('konten')
 <div class="mt-8 flex justify-center">
 
-<h5> Welcome  {{ $user['name'] }}  </h5>
+<h5> Welcome  {{auth()->user()->name }}  </h5>
 </div>
 <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 ms-4 me-4">
 

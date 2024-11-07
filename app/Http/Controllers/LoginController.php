@@ -27,11 +27,11 @@ class LoginController extends Controller
             // tambahkan data lain yang kamu perlukan
         ];
           $buku =  Book::all();
-            // return redirect()->route('user')->with('buku', $buku);
-            return view('user',[
-                'user'=>$userData,
-                'buku'=>$buku
-            ]);
+            return redirect()->route('user')->with('buku', $buku);
+            // return view('user',[
+            //     'user'=>$userData,
+            //     'buku'=>$buku
+            // ]);
         }
         return back()->with('error',"Login Failed");
     }
