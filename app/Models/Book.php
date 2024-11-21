@@ -13,4 +13,7 @@ class Book extends Model
         'penulis',
         'deskripsi'
     ];
+    public function users(){
+        return $this->belongsTo(User::class,"user_id","id");
+    }
 }

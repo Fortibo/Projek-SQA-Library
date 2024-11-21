@@ -1,51 +1,62 @@
 @extends('base')
 @section('konten')
-<div class="flex justify-center">
-<div class="w-full px-6 sm:max-w-xl sm:rounded-lg">
-    <div class="grid max-w-2xl mx-auto">
-        <div class="items-center mb-16 sm:mt-14 text-[#202142]">
-            <div
-                class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
-                <div class="w-full">
-                    <label for="first_name" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
-                        Username</label>
-                    <input type="text" id="first_name"
-                        class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                        placeholder="Your first name" value="{{auth()->user()->name}}" required>
-                </div>
-            </div>
-
-            <div class="mb-2 sm:mb-6">
-                <label for="email" class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
-                    email</label>
-                <input type="email" id="email"
-                    class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                    placeholder="your.email@mail.com" required>
-            </div>
-
-            <div class="mb-2 sm:mb-6">
-                <label for="profession"
-                    class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">password</label>
-                <input type="text" id="profession"
-                    class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                    placeholder="your profession" required>
-            </div>
-
-            <div class="mb-2 sm:mb-6">
-                <label for="profession"
-                    class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">confirm password</label>
-                <input type="text" id="profession"
-                    class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                    placeholder="your profession" required>
-            </div>
-
-            <div class="flex justify-end">
-                <button type="submit"
-                    class="text-white bg-indigo-700  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Save</button>
-            </div>
-
+<section class="bg-gray-50 dark:bg-gray-900 py-10">
+  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
+      @if (session('success'))
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <span class="font-medium">{{ session('success') }}</span>
         </div>
-    </div>
-</div>
-</div>
+     @endif
+      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                  Profile Information
+              </h1>
+              <form class="space-y-4 md:space-y-6" action="{{ route('editProfile') }}" method="POST">
+                @csrf
+                <input type="hidden" name="uid" value="{{ Auth::user()->id }}">
+                  <div>
+                      <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                      <input type="name" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{ Auth::user()->name}}" required value ="{{ Auth::user()->name}}">
+                  </div>
+                  <div>
+                      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                      <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{ Auth::user()->email}}" required value ="{{ Auth::user()->email}}">
+                      @error('email')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                      @enderror
+                    </div>
+                  <div>
+                      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">New Password</label>
+                      <input type="password" name="password" id="password" placeholder="New Password" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  </div>   
+                  <div>
+                      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
+                      <!-- <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""> -->
+                      <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm Password" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  </div>   
+                  <div class="flex flex-wrap space-x-4">
+                      <button type="reset" class="w-44 text-blue-500 outline bg-white hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Cancel</button>
+                      <button type="submit" class="w-44 text-white bg-red-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Save</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</section>
+@endsection
+
+@section('script')
+<script>
+    function selectGender(value) {
+        document.getElementById('gender').value = value;
+        // console.log(value)
+        document.getElementById('dropdownSelectGender').innerText = `Selected: ${value}`;
+        document.getElementById('DropdownGender').classList.add('hidden');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('dropdownSelectGender').innerText = `Selected: {{ Auth::user()->gender }}`;
+    });
+</script>
 @endsection
