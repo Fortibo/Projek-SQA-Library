@@ -32,7 +32,9 @@ Route::middleware('role:admin')->group(function () {
  
 });
 Route::middleware('role:user')->group(function () {
-   
+    Route::get('/profile', function(){
+        return view('profile');
+    })->name('profile');
 }); 
 
 Route::middleware('auth')->group(function(){
