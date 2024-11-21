@@ -71,4 +71,8 @@ class LoginController extends Controller
     // Kirim data ke view
     return view('user', compact('user'));
 }
+public function index(){
+    $buku =  Book::all();
+    return view('user',['buku'=> $buku]);
+}
 }

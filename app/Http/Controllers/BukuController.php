@@ -14,4 +14,10 @@ class BukuController extends Controller
         'buku'=> $buku
        ]);
     }
+    public function delete($id){
+        $buku =  Book::findOrFail($id);
+        $buku->delete();
+        $book = Book::all();
+        return redirect()->route('admin',['buku' => $book]);
+    }
 }
