@@ -110,5 +110,4 @@ class LoginController extends Controller
     
         return redirect()->route('profile')->with('success', 'Profile updated successfully!');
     }
->>>>>>>>> Temporary merge branch 2
 }
