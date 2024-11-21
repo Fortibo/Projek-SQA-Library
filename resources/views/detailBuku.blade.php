@@ -1,13 +1,19 @@
 @extends('base')
 @section('konten')
-    <div class="flex justify-center">
-        <h5>{{$buku->judul}}</h5>
+<div>
+    
+</div>
+    <div class="flex justify-center mt-4">
+        <h5 class="text-4xl font-bold">{{$buku->judul}}</h5>
     </div>
-    <div class="flex justify-center">
-        <h2>{{$buku->penulis}}</h2>
+    <div class="flex justify-center mb-4">
+        <h2 class="text-blue-500">{{$buku->penulis}}</h2>
     </div>
-    <div class="flex justify-center">
-        <p>{{$buku->deskripsi}}</p>
+    <div class=" flex justify-center mx-4 border-2 text-white rounded-b-2xl p-4 bg-blue-950 border-blue-900">
+        <p class="indent-8">{{$buku->deskripsi}}</p>
     </div>
-    <a href="{{route('user')}}">back to home</a>
+    <div class="ms-4 mt-4">
+        <a href="{{route('user')}}"     class="text-white rounded-full bg-blue-900 px-4 py-2" ><- back to home</a>
+        
+    </div>
 @endsection
