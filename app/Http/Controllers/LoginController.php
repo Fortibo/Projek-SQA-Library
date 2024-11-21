@@ -20,19 +20,19 @@ class LoginController extends Controller
         ]);
         if (Auth::attempt($cred)) {
             $r->session()->regenerate();
-            $user = Auth::user();
-
-            $userData = [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-                // tambahkan data lain yang kamu perlukan
-            ];
-            $buku = Book::all();
-            //   dd($buku);
-            $r->session()->put('buku', $buku);
-            return redirect()->route('user', [
-                'buku' => $buku
+           $user =  Auth::user();
+           
+           $userData = [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            // tambahkan data lain yang kamu perlukan
+        ];
+          $buku =  Book::all();
+        //   dd($buku);
+        $r->session()->put('buku', $buku);
+            return redirect()->route('user',[
+                'buku'=> $buku
             ]);
             // return view('user',[
             //     'user'=>$userData,
@@ -110,4 +110,5 @@ class LoginController extends Controller
     
         return redirect()->route('profile')->with('success', 'Profile updated successfully!');
     }
+
 }

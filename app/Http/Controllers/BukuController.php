@@ -14,6 +14,13 @@ class BukuController extends Controller
         'buku'=> $buku
        ]);
     }
+
+    public function fetchEditBuku($id){
+        $buku = Book::findOrFail($id);
+
+        return view('editBuku', compact('buku'));
+    }
+
     public function delete($id){
         $buku =  Book::findOrFail($id);
         $buku->delete();

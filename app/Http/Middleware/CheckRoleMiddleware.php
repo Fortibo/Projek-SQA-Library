@@ -16,16 +16,17 @@ class CheckRoleMiddleware
      */
     public function handle(Request $request, Closure $next, ...$permission): Response
     {
-        // if(Auth::user() !== null){
-        //     $user = Auth::user();
-        //     if($user->roles->isNotEmpty() && in_array($user->roles->first()->role, $permission)){
-        //     }
-        //     else abort(403);
-        // }
-        // else{
-        //     return redirect()->route('login');
-        // }
-        
-        return $next($request);
+        if(Auth::user() !== null){
+            $user = Auth::user();
+            for($i = 0; $i<2 ; $i++){
+                if(in_array($user->roles[$i]->role, $permission)){
+                    return $next($request);
+                }
+                else abort(403);
+            }
+        }
+        else{
+            return redirect()->route('login');
+        }
     }
 }

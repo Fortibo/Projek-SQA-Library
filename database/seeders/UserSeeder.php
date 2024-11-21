@@ -15,15 +15,25 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        
-        // DB::table('roles')->insert([
-        //     'user_id'=> "1",
-        //     'role'=>"kasir"
-        // ]);
-        // DB::table('roles')->insert([
-        //     'user_id'=> "3",
-        //     'role'=>"user"
-        // ]);
+        DB::table('users')->insert([
+            'name' => "user",
+            'email' => "user@gmail.com",
+            'password' => bcrypt("password"),
+        ]);
+        DB::table('users')->insert([
+            'name' => "admin",
+            'email' => "admin@gmail.com",
+            'password' => bcrypt("password"),
+        ]);
+
+        DB::table('roles')->insert([
+            'user_id'=> "1",
+            'role'=>"user"
+        ]);
+        DB::table('roles')->insert([
+            'user_id'=> "2",
+            'role'=>"admin"
+        ]);
 
         DB::table('books')->insert([
             'judul'=> "Halo",

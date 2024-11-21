@@ -11,7 +11,7 @@
     <div>
         @include('nav')
     </div>
-    <div class="container">
+    <div>
         @yield('konten')
     </div>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
