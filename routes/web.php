@@ -37,8 +37,6 @@ Route::middleware('role:user')->group(function () {
 }); 
 
 Route::middleware('auth')->group(function(){
-   
-  
     // Route::get('/user', [LoginController::class, 'dashboard'])->name('user.dashboard');
     Route::get('/user', function(){
        
@@ -47,7 +45,7 @@ Route::middleware('auth')->group(function(){
         return view('user', ['buku'=> $buku]);
     })->name('user');
 Route::post('/logout',[LoginController::class,'logout'])->name('logout');   
-
+});
 Route::post('/',[LoginController::class,'auth'])->name('login');
 Route::post('/signup',[LoginController::class,'create'])->name('signup'); 
 Route::get('/buku/{id}',[BukuController::class,'tampil'])->name('detail.buku');  
