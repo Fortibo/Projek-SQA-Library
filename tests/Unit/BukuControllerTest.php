@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Models\Book;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -61,5 +62,12 @@ public function test_post_method_is_called(): void
 
     // dump($response);
     $response->assertStatus(302);
+ }
+ public function test_detail_buku(){
+    $this->withoutMiddleware();
+    
+    $r = $this->get('/edit/buku/1');
+    dump($r->getContent());
+    $r->assertStatus(302);
  }
 }
