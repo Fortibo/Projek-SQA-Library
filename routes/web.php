@@ -27,9 +27,9 @@ Route::post('/',[LoginController::class,'auth'])->name('login');
 Route::post('/signup',[LoginController::class,'create'])->name('signup'); 
 
 
-Route::middleware('auth')->group(function(){
+
     //ADMIN USER ACCESS
-    Route::middleware('role:admin,user')->group(function () {
+   
         Route::get('/buku/{id}',[BukuController::class,'tampil'])->name('detail.buku'); 
 
         Route::get('/user', function(){
@@ -37,39 +37,37 @@ Route::middleware('auth')->group(function(){
                 $buku = Book::all();
                 return view('user', ['buku'=> $buku]);
             })->name('user');
-        }); 
-        
+
     //ADMIN ONLY
-    Route::middleware('role:admin')->group(function () {
+
         Route::get('/admin',[AdminController::class,'index'])->name('admin');
         Route::post('/edit/buku', [AdminController::class, 'edit'])->name('submit.edit');
         Route::get('/edit/buku/{id}',[BukuController::class,'fetchEditBuku'])->name('edit.buku');  
         Route::get('/add/buku/',[AdminController::class,'add'])->name('add.buku');  
         Route::post('/add/buku/',[AdminController::class,'insert'])->name('insert.buku');  
         Route::delete('/delete/buku/{id}',[BukuController::class,'delete'])->name('delete.buku');  
-    });
+
 
     //USER ONLY
-    Route::middleware('role:user')->group(function () {
+  
         Route::get('/profile', function(){
             return view('profile');
         })->name('profile');
         // Route::get('/user', [LoginController::class, 'dashboard'])->name('user.dashboard');
-    });
+
     
     Route::post('/logout',[LoginController::class,'logout'])->name('logout');   
-});
 
-Route::middleware('role:admin')->group(function () {
+
     Route::get('/admin',[AdminController::class,'index'])->name('admin');
-});
-Route::middleware('role:user')->group(function () {
+
+
     Route::get('/profile', function(){
         return view('profile');
     })->name('profile');
 
     Route::post('/editProfile', [LoginController::class, 'edit'])->name('editProfile');
-}); 
+
 
    
   

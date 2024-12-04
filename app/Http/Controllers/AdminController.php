@@ -17,11 +17,12 @@ class AdminController extends Controller
         return view('addBuku');
     }
     public function insert(Request $r){
-        Book::create([
-            'judul'=> $r->judul,
-            'penulis'=> $r->penulis,
-            'deskripsi'=> $r->deskripsi
+        $cek = $r->validate([
+            'judul' => 'required|unique:books|max:255',
+            'penulis' => 'required',
+            'deskripsi'=> 'required|max:1000'
         ]);
+        Book::create($cek);
        $buku = Book::all();
         return redirect()->route('admin',['buku'=> $buku]);
     }
