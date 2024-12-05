@@ -24,7 +24,7 @@ class BukuControllerTest extends TestCase
 //     dump('Metode dijalankan');
 //     $this->assertTrue(true);
 // }
-public function test_post_method_is_called(): void
+public function test_post_method_dipanggil_create_buku(): void
 {
     // Buat user untuk otentikasi (jika diperlukan)
     $user = User::factory()->create();
@@ -39,9 +39,10 @@ public function test_post_method_is_called(): void
     // Dump responsenya untuk memastikan data dikembalikan
     dump(" Respon : " . $response->getstatusCode());
     dump("Buku sudah di add dan ada dalam halaman");
-    // Pastikan HTTP status code adalah 200 (OK) atau redirect (302)
+
+    //  HTTP status code  200 (OK) / redirect (302)
     $response->assertStatus(302); // Ganti sesuai ekspektasi
-    // $response->assertSee('/admin'); // Cek apakah view berhasil di-redirect atau ditampilkan.
+    // $response->assertSee('/admin'); // Cek apakah view berhasil di redirect atau ditampilkan.
 
     // Pastikan data masuk ke database (jika database testing diaktifkan)
     $this->assertDatabaseHas('books', [
@@ -102,6 +103,6 @@ public function test_post_method_is_called(): void
   $response->assertSee('Testing Judul'); // Pastikan judul terlihat di halaman
   $response->assertSee('Testing Penulis'); // Pastikan penulis terlihat
   $response->assertSee('Testing Deskripsi'); // Pastikan deskripsi terlihat
-  dump("Buku sudah dilihat dan ada dalam halaman");
+  dump("Buku sudah dilihat dan ada dalam halaman" );
  }
 }

@@ -23,8 +23,14 @@ class SimpleRouteTest extends TestCase
         $this->actingAs($user);
         $this->assertTrue(true);
         // artinya kita get routenya, status 200 berarti ok, 404 itu not found
-        $this->get('/')->assertStatus(200);
-        $this->get('/signup')->assertStatus(200);
-        
+        $home = $this->get('/')->assertStatus(302);
+        dump("route '/' berhasil" . $home->getstatusCode());
+
+        $response =  $this->get('/signup')->assertStatus(302);
+        dump("route '/signup' berhasil (redirect) : " . $response->getstatusCode());
+        $response->assertRedirect(route('login'));
+        dump("route '/signup' berhasil redirect ke login");
+        $response->assertLocation('/');
+        dump("route '/signup' berhasil redirect ke login di lokasi /");
     }
 }
