@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("user_id")->nullable();
             $table->foreign("user_id")->references("id")->on("users");
-            $table->string('judul');
-            $table->string('penulis');
-            $table->text('deskripsi');
+            $table->string('judul')->charset('utf8mb4');
+            $table->string('penulis')->charset('utf8mb4');
+            $table->text('deskripsi')->charset('utf8mb4');
             $table->timestamps();
         });
     }

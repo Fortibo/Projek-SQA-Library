@@ -9,13 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
     public function auth(Request $r)
     {
         $cred = $r->validate([
-            'name' => 'required',
+            'email' => 'required',
             'password' => 'required'
         ]);
         if (Auth::attempt($cred)) {
@@ -44,12 +45,47 @@ class LoginController extends Controller
     public function create(Request $r)
     {
 
-        $data = User::create([
-            'name' => $r->username,
-            'email' => $r->email,
-            'password' => Hash::make($r->password)
+        // $data = User::create([
+        //     'name' => $r->username,
+        //     'email' => $r->email,
+        //     'password' => Hash::make($r->password)
 
-        ]);
+        // ]);
+   // Validasi input
+   $validator = Validator::make($r->all(), [
+    'name'=> 'required|max:255',
+    'email' => 'required|email|unique:users,email',
+    'password' => [
+        'required',
+        'string',
+        'min:8', // Minimal 8 karakter
+        'regex:/[a-z]/', // Harus ada huruf kecil
+        'regex:/[A-Z]/', // Harus ada huruf besar
+        'regex:/[0-9]/', // Harus ada angka
+        
+    ],
+   
+],[
+    'password.min' => 'Password harus minimal 8 karakter.',
+    'password.regex' => 'Password harus mengandung huruf besar, huruf kecil, angka, dan simbol.',
+    'password.confirmed' => 'Konfirmasi password tidak cocok.',
+]);
+
+// Jika validasi gagal
+if ($validator->fails()) {
+    return back()
+        ->withErrors($validator)
+        ->withInput();
+}
+
+// Jika validasi berhasil, buat user baru
+User::create([
+    'name'=> $r->name,
+    'email' => $r->email,
+    'password' => bcrypt($r->password),
+]);
+
+        return redirect()->route('login')->with('success', 'Registration successful!');
         $userId = $data->id;
         Role::create([
             "user_id" => $userId,
@@ -58,6 +94,7 @@ class LoginController extends Controller
         return redirect()->route('login.show');
 
     }
+
     public function logout(Request $r)
     {
         Auth::logout();

@@ -19,8 +19,15 @@ class AdminController extends Controller
     public function insert(Request $r){
         $cek = $r->validate([
             'judul' => 'required|unique:books|max:255',
-            'penulis' => 'required',
+            'penulis' => 'required|max:255',
             'deskripsi'=> 'required|max:1000'
+        ],[
+            'judul.required' => 'Judul buku wajib diisi.',
+            'judul.unique' => 'Judul buku sudah ada.',
+            'judul.max' => 'Judul buku maksimal 255 karakter.',
+            'penulis.required' => 'Penulis wajib diisi.',
+            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'deskripsi.max' => 'Deskripsi maksimal 1000 karakter.',
         ]);
         Book::create($cek);
        $buku = Book::all();

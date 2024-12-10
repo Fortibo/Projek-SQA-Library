@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 class BukuControllerTest extends TestCase
 {
-    use RefreshDatabase; 
+    // use RefreshDatabase; 
     // use DatabaseTransactions;
     /**
      * Test validation fails when 'penulis' field is missing.
@@ -104,5 +104,82 @@ public function test_post_method_dipanggil_create_buku(): void
   $response->assertSee('Testing Penulis'); // Pastikan penulis terlihat
   $response->assertSee('Testing Deskripsi'); // Pastikan deskripsi terlihat
   dump("Buku sudah dilihat dan ada dalam halaman" );
+ }
+ public function test_untuk_boundary_value_kosong(){
+    $this->withoutMiddleware();
+    //  data 
+     // Data input tidak valid
+     $data = [
+        'judul' => '', // Judul kosong
+        'penulis' => '', // Penulis kosong
+        'deskripsi' => '', // Deskripsi kosong
+    ];
+    $response = $this->post(route('insert.buku', $data));
+
+    dump($response->getstatusCode());
+    // untuk cek error apakah ada session errornya
+    $response->assertSessionHasErrors(['judul']);
+    $response->assertSessionHasErrors(['penulis']);
+    $response->assertSessionHasErrors(['deskripsi']);
+ }
+ public function test_tidak_valid_jika_ada_judul_double(){
+    Book::create([
+        'judul' => 'Halo', // Judul sama
+        'penulis' => 'Eric', // 
+        'deskripsi' => 'blabla', // 
+    ]);
+
+    $newData = [
+        'judul' => 'Halo', // Judul sama
+        'penulis' => 'Eric',
+        'deskripsi' => 'blabla' 
+    ];
+    $response = $this->post(route('insert.buku'),$newData);
+    $response->assertSessionHasErrors(['judul']);
+    $response->assertDontSee('Eric');
+    $response->assertDontSee('blabla');
+
+ }
+ public function test_boundary_sama_untuk_judul__penulis__deskripsi(){
+    $data = [
+        "judul" => str_repeat('a',255),
+        'penulis'=> str_repeat('b',255),
+        'deskripsi'=>str_repeat('c',1000)
+    ];
+    // boundary pas 255,255,1000
+    $response = $this->post(route('insert.buku'),$data);
+    $this->assertDatabasehas('books',[
+        'judul' => str_repeat('a', 255),
+        'penulis' => str_repeat('b', 255),
+        'deskripsi' => str_repeat('c', 1000),
+    ]);
+    $response->assertRedirect(route('admin'));
+ }
+ public function test_melebihi_boundary_untuk_penulis__judul__deskripsi(){
+    $data = [
+        "judul" => str_repeat('a',256),
+        'penulis'=> str_repeat('b',256),
+        'deskripsi'=>str_repeat('c',1001)
+    ];
+    $response = $this->post(route('insert.buku'),$data);
+    $response->assertSessionHasErrors(['judul']);
+    $response->assertSessionHasErrors(['penulis']);
+    $response->assertSessionHasErrors(['deskripsi']);
+ }
+ public function test_input_buku_bahasa_lain() {
+    $data = [
+        'judul'=> '我欠你',
+        'penulis' => 'ميسيل',
+        'deskripsi'=> '할로 카무 칸틱 하리 이니'
+    ];
+    $response = $this->post(route('insert.buku'),$data);
+      // Pastikan redirect berhasil
+      $response->assertRedirect(route('admin'));
+    $this->assertDatabasehas('books',[
+        'judul' => '我欠你',
+        'penulis' => 'ميسيل',
+        'deskripsi' => '할로 카무 칸틱 하리 이니',
+    ]);
+ 
  }
 }
