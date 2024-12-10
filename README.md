@@ -69,3 +69,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ## tutorial Testing by Eric Yoel
 1. php artisan test --filter=BukuControllerTest --testdox (untuk file tertentu)
 2. php artisan test --testdox    (untuk universal)
+3. php artisan test
+4. php artisan test --filter Unit (untuk unit saja)

@@ -37,8 +37,8 @@ public function test_post_method_dipanggil_create_buku(): void
     ]);
 
     // Dump responsenya untuk memastikan data dikembalikan
-    dump(" Respon : " . $response->getstatusCode());
-    dump("Buku sudah di add dan ada dalam halaman");
+    // dump(" Respon : " . $response->getstatusCode());
+    // dump("Buku sudah di add dan ada dalam halaman");
 
     //  HTTP status code  200 (OK) / redirect (302)
     $response->assertStatus(302); // Ganti sesuai ekspektasi
@@ -77,7 +77,7 @@ public function test_post_method_dipanggil_create_buku(): void
     $response->assertRedirect(route('admin'));
     // testing kalau bukunya sudah ga ada di database
     $this->assertDatabaseMissing('books', ['id' => $buku->id]);
-    dump("Buku sudah di terima,di delete, dan di hapus dari database");
+    // dump("Buku sudah di terima,di delete, dan di hapus dari database");
 
  }
 
@@ -96,7 +96,7 @@ public function test_post_method_dipanggil_create_buku(): void
         'deskripsi' => 'Testing Deskripsi',
     ]);
     $response = $this->get(route('detail.buku',$buku->id));
-    dump($response->getstatusCode());
+    // dump($response->getstatusCode());
     // pastikan status 200
     $response->assertStatus(200);
   // Pastikan konten buku terlihat di respons
@@ -116,7 +116,7 @@ public function test_post_method_dipanggil_create_buku(): void
     ];
     $response = $this->post(route('insert.buku', $data));
 
-    dump($response->getstatusCode());
+    // dump($response->getstatusCode());
     // untuk cek error apakah ada session errornya
     $response->assertSessionHasErrors(['judul']);
     $response->assertSessionHasErrors(['penulis']);

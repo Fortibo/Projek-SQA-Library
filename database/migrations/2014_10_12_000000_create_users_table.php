@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->charset('utf8mb4');
-            $table->string('email')->unique()->charset('utf8mb4');
+            $table->string('name')->charset('utf8mb4')->collation('utf8mb4_unicode_ci');            ;
+            $table->string('email')->unique()->charset('utf8mb4')->collation('utf8mb4_unicode_ci');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->charset('utf8mb4');
             $table->rememberToken();

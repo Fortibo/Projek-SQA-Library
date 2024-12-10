@@ -62,7 +62,7 @@ class LoginController extends Controller
         'regex:/[a-z]/', // Harus ada huruf kecil
         'regex:/[A-Z]/', // Harus ada huruf besar
         'regex:/[0-9]/', // Harus ada angka
-        
+        'max:255'
     ],
    
 ],[
@@ -79,11 +79,11 @@ if ($validator->fails()) {
 }
 
 // Jika validasi berhasil, buat user baru
-User::create([
-    'name'=> $r->name,
-    'email' => $r->email,
-    'password' => bcrypt($r->password),
-]);
+        User::create([
+            'name'=> $r->name,
+            'email' => $r->email,
+            'password' => bcrypt($r->password),
+        ]);
 
         return redirect()->route('login')->with('success', 'Registration successful!');
         $userId = $data->id;
