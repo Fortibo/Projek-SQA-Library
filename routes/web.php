@@ -42,7 +42,7 @@ Route::post('/signup',[LoginController::class,'create'])->name('signup');
 
         Route::get('/admin',[AdminController::class,'index'])->name('admin');
         Route::post('/edit/buku', [AdminController::class, 'edit'])->name('submit.edit');
-        Route::get('/edit/buku/{id}',[BukuController::class,'fetchEditBuku'])->name('edit.buku');  
+        Route::get('/edit/buku/{id}',[BukuController::class,'editBuku'])->name('edit.buku');  
         Route::get('/add/buku/',[AdminController::class,'add'])->name('add.buku');  
         Route::post('/add/buku/',[AdminController::class,'insert'])->name('insert.buku');  
         Route::delete('/delete/buku/{id}',[BukuController::class,'delete'])->name('delete.buku');  
@@ -83,7 +83,7 @@ Route::post('/logout',[LoginController::class,'logout'])->name('logout');
 Route::post('/',[LoginController::class,'auth'])->name('login');
 Route::post('/signup',[LoginController::class,'create'])->name('signup'); 
 Route::get('/buku/{id}',[BukuController::class,'tampil'])->name('detail.buku');  
-Route::get('/edit/buku/{id}',[BukuController::class,'edit'])->name('edit.buku');  
+
 Route::get('/add/buku/',[AdminController::class,'add'])->name('add.buku');  
 Route::post('/add/buku/',[AdminController::class,'insert'])->name('insert.buku');  
 Route::delete('/delete/buku/{id}',[BukuController::class,'delete'])->name('delete.buku');  

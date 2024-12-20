@@ -15,7 +15,7 @@ class BukuController extends Controller
        ]);
     }
 
-    public function fetchEditBuku($id){
+    public function editBuku($id){
         $buku = Book::findOrFail($id);
         
         return view('editBuku', compact('buku'));
